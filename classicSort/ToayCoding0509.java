@@ -1,5 +1,8 @@
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.PriorityQueue;
+
+import com.sun.org.apache.regexp.internal.recompile;
 
 /**
  * 堆的插入：
@@ -10,8 +13,8 @@ import java.util.PriorityQueue;
 public class ToayCoding0509 {
     public static void main(String[] args) {
         
+    	//如果不传入比较器 默认是小根堆。
     	PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(new Comparator<Integer>() {
-
 			@Override
 			public int compare(Integer o1, Integer o2) {
 				return o2 - o1;
@@ -23,9 +26,13 @@ public class ToayCoding0509 {
 		priorityQueue.add(1);
 		priorityQueue.add(33);
 		priorityQueue.add(99);
-		while (!priorityQueue.isEmpty()) {
-			System.out.println(priorityQueue.poll());
-		}
+		 
+		int[] diff = {85,47,57};
+		int[] profit = {24,66,99};
+		int[] work = {40,25,25};
+		int res = maxProfitAssignment(diff,profit,work);
+		System.out.println(res);
+		
     }
     //出现次数的TOP k问题
     //题目8 给定String类型的数组strArr,再给定整数k，请严格按照排名顺序打印出现次数前k名的字符串。
@@ -41,5 +48,72 @@ public class ToayCoding0509 {
     //题目13 K代表你一共可以选的项目数，W代表你的初始启动资金。
     //       Profits数组代表每个项目的收益，Capital数组代表每个项目需要的启动资金。一个项目能做的条件是你当前的
     //       启动资金大于项目的启动资金。一个项目做完后，该项目的收益会加到你的启动资金上，求你能够获得的最大收益。
-    //       要求时间复杂度为O(N * log N).
+    //       要求时间复杂度为O(N * log N)
+    /**
+     * 
+     * @param profits
+     * @param capital
+     * @param k 
+     * @param w
+     * @return
+     */
+    public static int getMaxProfit(int[] profits,int[] capital,int k,int w) {
+    	return 0;
+    }
+    //工作类
+    static class Worker implements Comparable<Worker>{
+        public int difficulty;
+        public int profit;
+        Worker(int d,int p){
+            this.difficulty = d;
+            this.profit = p;
+        }
+		@Override
+		public int compareTo(Worker o) {
+			return o.difficulty;
+		}
+	
+		@Override
+		public String toString() {
+			return "diffcults:" + this.difficulty + "  profits:"+this.profit;
+		}
+    }
+
+    public static int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
+        PriorityQueue<Worker> priorityQueue = new PriorityQueue<>(new Comparator<Worker>() {
+
+			@Override
+			public int compare(Worker o1, Worker o2) {
+				return o2.profit - o1.profit;
+			}
+		});
+        for(int i = 0;i < difficulty.length;i++){
+            priorityQueue.add(new Worker(difficulty[i],profit[i]));
+        }
+        int maxProfits = 0;
+        for(int i = 0;i < worker.length;i++) {
+        	PriorityQueue<Worker> PPQ = new PriorityQueue<>(new Comparator<Worker>() {
+
+    			@Override
+    			public int compare(Worker o1, Worker o2) {
+    				return o2.profit - o1.profit;
+    			}
+    		});
+        	
+        	Iterator<Worker> iterator = priorityQueue.iterator();
+        	while(iterator.hasNext()) {
+        		Worker worker2 = iterator.next();
+        		if (worker[i] >= worker2.difficulty) {
+					PPQ.add(worker2);
+				}
+        	}
+        	if (PPQ.peek() != null) {
+        		maxProfits += PPQ.peek().profit;
+			}
+        	
+        }
+        return maxProfits;
+    }
+    
+    
 }
