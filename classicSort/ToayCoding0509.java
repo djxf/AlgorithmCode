@@ -1,12 +1,36 @@
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
+/**
+ * 堆的插入：
+ * 		1 
+ * @author 斗酒相逢
+ *
+ */
 public class ToayCoding0509 {
     public static void main(String[] args) {
         
+    	PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o2 - o1;
+			}
+		});
+		priorityQueue.add(333);
+		priorityQueue.add(222);
+		priorityQueue.add(111);
+		priorityQueue.add(1);
+		priorityQueue.add(33);
+		priorityQueue.add(99);
+		while (!priorityQueue.isEmpty()) {
+			System.out.println(priorityQueue.poll());
+		}
     }
     //出现次数的TOP k问题
     //题目8 给定String类型的数组strArr,再给定整数k，请严格按照排名顺序打印出现次数前k名的字符串。
     //拓展：设计并实现TopRecord结构，可以不断地向其中加入字符串。并且可以随时打印加入次数最多前k个字符串。
-    //相关Java类
+    //相关Java类 PriorityQueue
 
     //题目9 有N个长度不一样的数组，所有数组升序排序。请从大到小打印这N个数组整体的前K个数。
 

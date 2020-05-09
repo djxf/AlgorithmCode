@@ -1,9 +1,9 @@
-package classicSort;
+
 
 public class SortDome{
     public static void main(String[] args) {
         int[] nums = {2,3,4,5,6,1,1,100,22,11};
-        mergeSort(nums);
+        heapSort(nums);
         for(int num : nums){
             System.out.print(num + " ");
         }
@@ -132,4 +132,59 @@ public class SortDome{
      * 时间复杂度：O(N*logN)
      * 空间复杂度：1 归并排序 O(N) 2 快速排序 O(logN) 3 堆排序 O(1)
      */
+    
+    /**
+     * 堆排序
+     * @param nums
+     */
+    public static void heapSort(int[] nums) {
+    	if(nums == null || nums.length < 2) {
+    		return;
+    	}
+    	for(int i = 0;i < nums.length;i++) {
+    		heapInsert(nums,i);
+    	}
+    	int size = nums.length;
+    	swap(nums, 0, --size);
+    	while(size > 0) {
+    		heapify(nums,0,size);
+    		swap(nums, 0, --size);
+    	}
+    }
+    /**
+     * 堆化操作
+     * @param nums 堆结构数组
+     * @param index 父节点序号
+     * @param size 数组长度
+     */
+    private static void heapify(int[] nums, int index, int size) {
+		 int left = 2 * index + 1;
+		 while(left < size) {
+			 int largest = left + 1 < size && nums[left + 1] > nums[left] ? left + 1 : left;
+			 largest = nums[largest] > nums[index] ? largest : index;
+			 //如果比子节点都大。则直接结束。
+			 if(largest == index) {
+				 break;
+			 }
+			 
+			 //否则交换
+			 swap(nums, largest, index);
+			 index = largest;
+			 left = index * 2 + 1;
+		 }
+		
+	}
+
+	/**
+     * 对元素nums[i] 进行上升操作
+     * @param nums
+     * @param i
+     */
+	private static void heapInsert(int[] nums, int i) {
+		while(nums[i] > nums[(i - 1) / 2]) {
+			swap(nums, i, (i - 1) / 2);
+			i = (i - 1) / 2;
+		}
+		
+	}
 }
