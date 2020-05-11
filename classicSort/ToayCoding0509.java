@@ -30,8 +30,9 @@ public class ToayCoding0509 {
 		int[] diff = {85,47,57};
 		int[] profit = {24,66,99};
 		int[] work = {40,25,25};
-		int res = maxProfitAssignment(diff,profit,work);
-		System.out.println(res);
+		int x = 4;
+		char a='a';
+		System.out.println(2==2?98.9:a);
 		
     }
     //出现次数的TOP k问题
