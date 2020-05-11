@@ -16,7 +16,7 @@ public class TodayCoding0511 {
 	public static void main(String[] args) {
 			int[] nums = {1,2,3,4,5,6,7};
 			MTree mTree = arrayToTree(nums, 0);
-			serialByLevlelInline(mTree); 
+			posOrderUnRecur2(mTree); 
 			 
 	}
 	/**
@@ -109,7 +109,52 @@ public class TodayCoding0511 {
 	
 	
 	//两个栈后序遍历
-	 
+	public static void posOrderUnRecur(MTree head) {
+		if(head == null) {
+			return;
+		}
+		Stack<MTree> stack1 = new Stack<>();
+		Stack<MTree> stack2 = new Stack<>();
+		stack1.push(head);
+		while(!stack1.isEmpty()) {
+			MTree headTree = stack1.pop();
+			stack2.push(headTree);
+			if(headTree.leftTree != null) {
+				stack1.push(headTree.leftTree);
+			}
+			if(headTree.rightTree != null) {
+				stack1.push(headTree.rightTree);
+			}
+		}
+		while(!stack2.isEmpty()) {
+			System.out.print(stack2.pop().value + " ");
+		}
+		
+	}
+	
+	//一个栈实现后序遍历
+	public static void posOrderUnRecur2(MTree head) {
+		if(head == null) {
+			return;
+		}
+		Stack<MTree> stack = new Stack<>();
+		stack.push(head);
+		//用处
+		MTree c = null;
+		while(!stack.isEmpty()) {
+			c = stack.peek();
+			if(c.leftTree != null && head != c.leftTree && head != c.rightTree) {
+				//这意味着什么呢？
+				stack.push(c.leftTree);
+			}else if (c.leftTree != null && head != c.rightTree) {
+				stack.push(c.rightTree);
+			}else {
+				System.out.print(stack.pop().value + " ");
+				head = c;
+			}
+		}
+	}
+	
 	
 	//树结构
 	static class MTree{
