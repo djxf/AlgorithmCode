@@ -1,4 +1,4 @@
-package classicSort;
+package 算法;
 
 
 public class SortDome{
