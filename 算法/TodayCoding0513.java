@@ -1,12 +1,11 @@
 package 算法;
 
-
+import Bean.TreeNode;
 
 public class TodayCoding0513 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		 
 	}
 	
 	/**
@@ -34,21 +33,19 @@ public class TodayCoding0513 {
 		        }
 		        int left = maxTreeHeigh(tree.left);
 		        int right = maxTreeHeigh(tree.right);
-		        //需要在此更新最长路劲 因为不一定穿过根节点
+		        //需要在此更新最长路径 因为不一定穿过根节点
 		        result = Math.max(result, left + right);
 		        return 1 + Math.max(left,right);
 		   }
-	 
 	
-	class Tree{
-		Tree(){
-			
-		}
-		Tree(int value){
-			this.value = value;
-		}
-		Tree lefTree;
-		Tree rigTree;
-		int value;
-	}
+		  /**
+		   * 给定一颗二叉树的头节点head,已知所有节点的值都不一样。返回其中最大的且符合搜索二叉树条件的最大拓扑结构。
+		   * O(N * logN)
+		   * 拓扑贡献记录
+		   * @author 斗酒相逢
+		   *
+		   */
 }
+
+
+
