@@ -186,6 +186,5 @@ public class SortDome{
 			swap(nums, i, (i - 1) / 2);
 			i = (i - 1) / 2;
 		}
-		
 	}
 }

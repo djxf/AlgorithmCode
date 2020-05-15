@@ -11,7 +11,7 @@ import com.sun.org.apache.regexp.internal.recompile;
  * @author 斗酒相逢
  *
  */
-public class ToayCoding0509 {
+public class TodayCoding0509 {
     public static void main(String[] args) {
         
     	//如果不传入比较器 默认是小根堆。
